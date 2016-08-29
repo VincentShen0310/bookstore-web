@@ -1,0 +1,124 @@
+ /* 首页轮播广告 */
+.carousel {
+	height: 500px;
+	margin-bottom: 60px;
+	}
+
+.carousel .item {
+	height: 500px;
+	background-color: #000;
+	}
+
+.carousel .item img {
+	width: 100%;
+	}
+
+.carousel-caption {
+	z-index: 10;
+	}
+
+.carousel-caption p {
+	margin-bottom: 20px;
+	font-size: 20px;
+	line-height: 1.8;
+	}
+	
+/* 首页简介 */
+.summary {
+	padding-right: 15px;
+	padding-left: 15px;
+	}
+
+	.summary .col-md-3 {
+	margin-bottom: 20px;
+	text-align: center;
+	}
+	
+/* 图书列表页 */
+.booklist{
+	width: 800px;
+	margin: 0 auto;
+	float:left;
+	margin-top:10px;
+}
+
+.booklist .bookinfo{
+	margin-bottom: 5px;
+	padding: 20px 0 0;
+	height: 170px;
+	border-top:1px dashed #ddd;
+}
+
+.booklist .bookinfo .pic{
+	width: 90px;
+	height: 130px;
+	float: left;
+	margin-right:10px;
+}
+
+.booklist .bookinfo .pic img{
+	width: 100%;
+	height: 130px;
+}
+
+.booklist .bookinfo .description{
+	float: left;
+}
+
+.booklist .bookinfo .description .des{
+	height: 26px;
+	width: 700px;
+	font-size: 12px;
+	overflow:hidden;
+	white-space:nowrap;
+	text-overflow: ellipsis;
+}
+
+.righttag{
+	width: 300px;
+	margin: 0 auto;
+	float:right;
+	margin-top:10px;
+} 
+
+/*图书详情页 */
+.bookdetail{
+	width: 800px;
+	margin: 0 auto;
+	float:left;
+	margin-top:10px;
+}
+
+.bookdetail .basic{
+	margin-bottom: 5px;
+	padding: 20px 0 0;
+	height: 170px;
+}
+
+.bookdetail .basic .pic{
+	width: 90px;
+	height: 130px;
+	float: left;
+	margin-right:10px;
+}
+
+.bookdetail .basic .pic img{
+	width: 100%;
+	height: 130px;
+}
+
+.bookdetail .detailinfo{
+	width: 700px;
+}
+
+.bookdetail .detailinfo .title{
+	color: #ccc;
+}
+
+.bookdetail .detailinfo .des{
+	height: 100px;
+	width: 700px;
+	font-size: 12px;
+	overflow:hidden;
+	text-overflow: ellipsis;
+}
