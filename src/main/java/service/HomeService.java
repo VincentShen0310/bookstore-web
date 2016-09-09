@@ -1,9 +1,12 @@
 package main.java.service;
 
-import main.java.entity.Author;
+import java.util.List;
+
+import main.java.common.Page;
+import main.java.entity.Book;
 
 public interface HomeService {
 
-	Author queryAuthorByID(int id);
+	List<Book> queryBooksByCondition(String searchinfo, Page page);
 
 }

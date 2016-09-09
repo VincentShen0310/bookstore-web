@@ -1,6 +1,8 @@
 package main.java.service;
 
 import java.util.List;
+
+import main.java.common.Page;
 import main.java.entity.Book;
 
 public interface BookService {
@@ -9,8 +11,7 @@ public interface BookService {
 
 	List<Book> queryAllBooks();
 
-	List<Book> queryBooksByCondition(String name, String description, int status,
-			int isDisplay,String authorName);
+	List<Book> queryBooksByCondition(String searchinfo, Page page);
 	
-	List<Book> queryBookByAuthor(int id);
+	List<Book> queryBookByAuthorByCondition(int id,Page page);
 }

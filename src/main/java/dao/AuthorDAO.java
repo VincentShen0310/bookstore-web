@@ -1,6 +1,7 @@
 package main.java.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import main.java.entity.Author;
 
@@ -12,6 +13,5 @@ public interface AuthorDAO {
 	Author queryAuthorByID(@Param("id") int id);
 
 	//根据条件查询信息
-	List<Author> queryAuthorsByCondition(@Param("name") String name,
-			@Param("description") String description);
+	List<Author> queryAuthorsByCondition(Map<String, Object> map);
 }

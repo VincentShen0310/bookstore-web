@@ -18,8 +18,8 @@
 	<select id="queryAuthorByID" parameterType="int" resultMap="AuthorResult">
 		SELECT
 		id,name,description,status,is_display,update_time,update_user FROM author
-		where
-		id=#{id}
+		WHERE
+		id=#{id} AND status=1 AND is_display=1
 	</select>
 
 	<select id="queryAllAuthors" resultMap="AuthorResult">
@@ -28,16 +28,16 @@
 		limit #{offset},#{limit}
 	</select>
 
-	<select id="queryAuthorsByCondition" resultMap="AuthorResult">
+	<select id="queryAuthorsByCondition" parameterType="java.util.Map" resultMap="AuthorResult">
 		SELECT
 		id,name,description FROM author
 		<where>
 		status=1 AND is_display=1
-		<if test="name != null and name !='' ">
-			AND name like "%"#{name}"%"
+		<if test="author.name != null and author.name !='' and !&quot;&quot;.equals(author.name.trim()) ">
+			AND name like "%"#{author.name}"%"
 		</if>
-		<if test="description != null and description !='' ">
-			AND description like "%"#{description}"%"
+		<if test="author.description != null and author.description !='' and !&quot;&quot;.equals(author.description.trim()) ">
+			AND description like "%"#{author.description}"%"
 		</if>
 		</where>
 	</select>

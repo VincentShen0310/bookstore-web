@@ -3,9 +3,11 @@ package main.java.web;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
+import main.java.common.Page;
 import main.java.entity.Book;
 import main.java.service.BookService;
 
@@ -19,7 +21,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
@@ -30,16 +31,23 @@ public class BookController {
 	private BookService bookService;
 	
 	@RequestMapping(value="/list")
-	public String list(Model model,Book book,HttpServletRequest request){
+	public String list(Model model,HttpServletRequest request,Page page){
+		List<Book> list=bookService.queryBooksByCondition(request.getParameter("searchinfo"), page);
+		String currentPage = request.getParameter("currentPage");
+		Pattern pattern = Pattern.compile("[0-9]{1,9}");
+		if(currentPage == null ||  !pattern.matcher(currentPage).matches()) {
+			page.setCurrentPage(1);
+		} else {
+			page.setCurrentPage(Integer.valueOf(currentPage));
+		}
 		
-		List<Book> list=bookService.queryBooksByCondition(book.getName(), book.getDescription(), book.getStatus(), book.getIsDisplay(), request.getParameter("authorName"));
+		request.setAttribute("searchinfo", request.getParameter("searchinfo"));
 		model.addAttribute("list", list);
-		model.addAttribute("booksearch", book);
-		request.setAttribute("authorName", request.getParameter("authorName"));
+		model.addAttribute("page", page);
 		return "book/list";
 	}
 		
-	@RequestMapping(value="/{id}/detail",method=RequestMethod.GET)
+	@RequestMapping(value="/{id}/detail")
 	public String detail(Model model,@PathVariable("id") int id){
 		if (id==0) {
 			return "redirect:/book/list";

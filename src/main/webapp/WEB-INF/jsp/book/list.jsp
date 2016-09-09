@@ -23,40 +23,49 @@
                 <li><a href="#" data-toggle="modal" data-target="#about-modal">关于</a></li>
             </ul>
 
-        <form class="navbar-form navbar-right">
-            <div class="form-group">
-              <input type="text" placeholder="书名、作者" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-default">查询</button>
-          </form>
+<%@include file="../common/navbar.jsp"%>
         </div>
        
     </div>
 </div>
 
 	<div class="container">
+	<form class="navbar-form" id="navbar-form" method="post">
 		<div class="booklist">
 			<c:forEach var="book" items="${list}">
 				<div class="bookinfo">
 					<div class="pic">
-						<a href="${book.id}/detail"> 
-							<img src="${ctx}/resources/images/book/${book.id}.jpg">
+						<a href="${book.id}/detail" target="_blank"> 
+							<c:choose>
+								<c:when test="${book.isDisplay != null}">
+									<img src="${ctx}/resources/images/common/bookdefault.jpg">
+								</c:when>
+								<c:otherwise>
+									<img src="${ctx}/resources/images/book/${book.id}.jpg" >
+								</c:otherwise>					
+							</c:choose>
 						</a>
 					</div>
 					<div class="description">
 						<h4>
-							<a href="${book.id}/detail">${book.name} </a>
+							<a href="${book.id}/detail" target="_blank">${book.name}</a>
 						</h4>
 						<h5><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>&nbsp;${book.author.name}</h5>
 						<p class="des"><span class="glyphicon glyphicon-book" aria-hidden="true"></span>&nbsp;${book.description}</p>
 						<div>
-							<a class="btn btn-primary btn-xs" href="${book.id}/detail"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp;详情</a>
+							<a class="btn btn-primary btn-xs" href="${book.id}/detail" target="_blank"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp;详情</a>
 							<a class="btn btn-primary btn-xs" href="${book.id}/download"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;下载</a>
 						</div>
 					</div>
 				</div>
 			</c:forEach>
+		<%@include file="../common/pagination.jsp"%>
+		<input type="hidden" name="currentPage" id="currentPage" value="${page.currentPage}"/>
+			
 		</div>
+		</form>
+		
+		
 		<div class="righttag">
 
 				<img class="lazy" src="${ctx}/resources/images/book/1.jpg">
@@ -71,4 +80,6 @@
 				</p>
 		</div>
 </body>
+<%@include file="../common/footer.jsp"%>
+
 </html>

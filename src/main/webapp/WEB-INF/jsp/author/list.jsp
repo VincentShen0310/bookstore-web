@@ -23,24 +23,27 @@
                 <li><a href="#" data-toggle="modal" data-target="#about-modal">关于</a></li>
             </ul>
 
-        <form class="navbar-form navbar-right">
-            <div class="form-group">
-              <input type="text" placeholder="书名、作者" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-default">查询</button>
-          </form>
+		<%@include file="../common/navbar.jsp"%>
         </div>
        
     </div>
 </div>
 
 	<div class="container">
+	<form class="navbar-form" id="navbar-form" method="post">
 		<div class="booklist">
 			<c:forEach var="author" items="${list}">
 				<div class="bookinfo">
 					<div class="pic">
 						<a href="${author.id}/detail"> 
+						<c:choose>
+						<c:when test="!empty ${ctx}/resources/images/author/${author.id}.jpg">
 							<img src="${ctx}/resources/images/author/${author.id}.jpg">
+						</c:when>
+						<c:otherwise>
+							<img src="${ctx}/resources/images/author/default.jpg">
+						</c:otherwise>					
+						</c:choose>
 						</a>
 					</div>
 					<div class="description">
@@ -54,7 +57,14 @@
 					</div>
 				</div>
 			</c:forEach>
+			
+
+		<%@include file="../common/pagination.jsp"%>
+		<input type="hidden" name="currentPage" id="currentPage" value="${page.currentPage}"/>
 		</div>
+	</form>
+
+		
 		<div class="righttag">
 
 				<img class="lazy" src="${ctx}/resources/images/book/1.jpg">
@@ -69,4 +79,6 @@
 				</p>
 		</div>
 </body>
+<%@include file="../common/footer.jsp"%>
+
 </html>

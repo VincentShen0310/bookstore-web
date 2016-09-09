@@ -24,51 +24,46 @@
 		FROM book b
 		left join author a on b.author_id=a.id
 		<where>
-			b.id=#{id}
+			b.id=#{id} AND b.status=1 AND b.is_display=1
 		</where>
 	</select>
 	
-	<select id="queryBookByAuthor" resultMap="BookResult">
+	<select id="queryBookByAuthorByCondition" parameterType="java.util.Map" resultMap="BookResult">
 		SELECT
 		b.id b_id,b.name b_name,b.description b_description,
 		b.status b_status,b.is_display b_is_display,
 		b.author_id,a.name,a.description
 		FROM book b 
 		left join author a on b.author_id=a.id 
-		WHERE b.author_id =#{id} 
-		LIMIT 2
+		WHERE 
+		b.author_id =#{id} AND b.status=1 AND b.is_display=1
 	</select>
 
-	<select id="queryAllBooks" resultType="Book" resultMap="BookResult">
-		SELECT
-		id,name,description,status,is_display,author_id,update_time,update_user FROM book
-	</select>
-	
-	<select id="queryBooksByCondition" resultMap="BookResult">
+	<select id="queryAllBooks" resultMap="BookResult">
 		SELECT
 		b.id b_id,b.name b_name,b.description b_description,
 		b.status b_status,b.is_display b_is_display,
 		b.author_id,a.name
 		FROM book b
 		left join author a on b.author_id=a.id
-		<where>
+		WHERE
 			b.status=1 AND b.is_display=1
-		<if test="name != null and name !='' ">
-			AND b.name like "%"#{name}"%"
-		</if>
-		<if test="description != null and description !='' ">
-			AND b.description like "%"#{description}"%"
-		</if>
-		<if test="status != null and status !='' ">
-			AND b.status = #{status}
-		</if>
-		<if test="isDisplay != null and isDisplay !='' ">
-			AND b.is_display = #{isDisplay}
-		</if>
-		<if test="authorName != null and authorName !='' ">
-			AND a.name like "%"#{authorName}"%"
-		</if>
-		</where>
+	</select>
+	
+	<select id="queryBooksByCondition" parameterType="java.util.Map" resultMap="BookResult">
+		SELECT
+		b.id b_id,b.name b_name,b.description b_description,
+		b.status b_status,b.is_display b_is_display,
+		b.author_id,a.name
+		FROM book b
+		left join author a on b.author_id=a.id
+		WHERE
+			b.status=1 AND b.is_display=1
+			<if test="searchinfo != null and searchinfo !='' and !&quot;&quot;.equals(searchinfo.trim()) ">
+			AND ( b.name like "%"#{searchinfo}"%"
+			OR b.description like "%"#{searchinfo}"%"
+			OR a.name like "%"#{searchinfo}"%")
+			</if>
 	</select>
 	
 </mapper>

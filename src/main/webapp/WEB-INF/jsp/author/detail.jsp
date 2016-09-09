@@ -23,12 +23,7 @@
                 <li><a href="#" data-toggle="modal" data-target="#about-modal">关于</a></li>
             </ul>
 
-        <form class="navbar-form navbar-right">
-            <div class="form-group">
-              <input type="text" placeholder="书名、作者" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-default">查询</button>
-          </form>
+		<%@include file="../common/navbar.jsp"%>
         </div>
        
     </div>
@@ -50,7 +45,7 @@
 				</p>
 		</div>
 	
-	
+
 		<div class="bookdetail">
 				<div class="basic">
 					<div class="pic">
@@ -83,6 +78,7 @@
 			
 		</div>
 	
+	<form class="navbar-form" id="navbar-form" method="get">	
 		<div class="booklist">
 			<c:forEach var="book" items="${blist}">
 				<div class="bookinfo">
@@ -102,9 +98,12 @@
 					</div>
 				</div>
 			</c:forEach>
+		<%@include file="../common/pagination.jsp"%>
+		<input type="hidden" name="currentPage" id="currentPage" value="${page.currentPage}"/>
 		</div>
-
+	</form>
 
 </div>
 </body>
+	<%@include file="../common/footer.jsp"%>
 </html>
