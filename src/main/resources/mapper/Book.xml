@@ -3,7 +3,7 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="main.java.dao.BookDAO">
+<mapper namespace="dao.BookDAO">
 
 	<resultMap type="Book" id="BookResult">
 		<id column="b_id" jdbcType="INTEGER" property="id" />
@@ -12,7 +12,7 @@
 		<result column="b_status" jdbcType="INTEGER" property="status" />
 		<result column="b_is_display" jdbcType="INTEGER" property="isDisplay" />
 		<result column="b_author_id" jdbcType="INTEGER" property="authorId" />
-		<collection property="author" resultMap="main.java.dao.AuthorDAO.AuthorResult"/>
+		<collection property="author" resultMap="dao.AuthorDAO.AuthorResult"/>
 	</resultMap>
 
 
